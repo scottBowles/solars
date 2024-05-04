@@ -1,81 +1,27 @@
 <script lang="ts">
-  import { T } from '@threlte/core'
-  import { ContactShadows, Float, Grid, OrbitControls } from '@threlte/extras'
+	import { T } from '@threlte/core';
+	import { OrbitControls } from '@threlte/extras';
+
+	import RedSun from '$lib/components/models/RedSun.svelte';
+	import YellowSun from '$lib/components/models/YellowStar.svelte';
+	import Planet from '$lib/components/Planet.svelte';
+	import OrbitLine from './OrbitLine.svelte';
+	import { yellowSunPosition, redSunPosition, PLANETS } from '$lib/constants';
 </script>
 
-<T.PerspectiveCamera
-  makeDefault
-  position={[-10, 10, 10]}
-  fov={15}
->
-  <OrbitControls
-    autoRotate
-    enableZoom={false}
-    enableDamping
-    autoRotateSpeed={0.5}
-    target.y={1.5}
-  />
+<T.PerspectiveCamera makeDefault position={[0, 10, 10]} fov={45}>
+	<OrbitControls enableZoom={false} enableDamping />
 </T.PerspectiveCamera>
 
-<T.DirectionalLight
-  intensity={0.8}
-  position.x={5}
-  position.y={10}
-/>
-<T.AmbientLight intensity={0.2} />
+<T.AmbientLight intensity={0.07} />
 
-<Grid
-  position.y={-0.001}
-  cellColor="#ffffff"
-  sectionColor="#ffffff"
-  sectionThickness={0}
-  fadeDistance={25}
-  cellSize={2}
-/>
+<RedSun scale={0.06} position={redSunPosition.toArray()} />
+<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
 
-<ContactShadows
-  scale={10}
-  blur={2}
-  far={2.5}
-  opacity={0.5}
-/>
+<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
+<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
 
-<Float
-  floatIntensity={1}
-  floatingRange={[0, 1]}
->
-  <T.Mesh
-    position.y={1.2}
-    position.z={-0.75}
-  >
-    <T.BoxGeometry />
-    <T.MeshStandardMaterial color="#0059BA" />
-  </T.Mesh>
-</Float>
-
-<Float
-  floatIntensity={1}
-  floatingRange={[0, 1]}
->
-  <T.Mesh
-    position={[1.2, 1.5, 0.75]}
-    rotation.x={5}
-    rotation.y={71}
-  >
-    <T.TorusKnotGeometry args={[0.5, 0.15, 100, 12, 2, 3]} />
-    <T.MeshStandardMaterial color="#F85122" />
-  </T.Mesh>
-</Float>
-
-<Float
-  floatIntensity={1}
-  floatingRange={[0, 1]}
->
-  <T.Mesh
-    position={[-1.4, 1.5, 0.75]}
-    rotation={[-5, 128, 10]}
-  >
-    <T.IcosahedronGeometry />
-    <T.MeshStandardMaterial color="#F8EBCE" />
-  </T.Mesh>
-</Float>
+{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination }}
+	<Planet {scale} {color} {orbitSpeed} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
+	<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
+{/each}
