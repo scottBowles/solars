@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
+	import { Stars } from '@threlte/extras';
 
 	import RedSun from '$lib/components/models/RedSun.svelte';
 	import YellowSun from '$lib/components/models/YellowStar.svelte';
@@ -14,6 +15,8 @@
 </T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.07} />
+
+<Stars />
 
 <RedSun scale={0.06} position={redSunPosition.toArray()} />
 <T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
