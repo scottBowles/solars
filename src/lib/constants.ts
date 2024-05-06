@@ -5,6 +5,7 @@ export const redSunPosition = new THREE.Vector3(-5, 0, 0);
 
 export const PLANETS = [
 	{
+		name: 'Magmus',
 		scale: 0.1,
 		color: 0x0000ff,
 		orbitSpeed: 0.5,
@@ -14,6 +15,7 @@ export const PLANETS = [
 		inclination: 0.122
 	},
 	{
+		name: 'Felucia',
 		scale: 0.1,
 		color: 0x00ff00,
 		orbitSpeed: 0.252,
@@ -23,6 +25,7 @@ export const PLANETS = [
 		inclination: 0
 	},
 	{
+		name: 'Terran',
 		scale: 0.1,
 		color: 0xffa500,
 		orbitSpeed: 0.08,
@@ -32,15 +35,27 @@ export const PLANETS = [
 		inclination: 0.023
 	},
 	{
+		name: 'Hyang Wan',
 		scale: 0.1,
 		color: 0x800080,
 		orbitSpeed: 0.04,
 		sunPosition: yellowSunPosition,
-		semiMajorAxis: 4.6,
+		semiMajorAxis: 3.8,
 		eccentricity: 0.133,
 		inclination: 0.014
 	},
 	{
+		name: 'Gonhirrim',
+		scale: 0.1,
+		color: 0x808080,
+		orbitSpeed: 0.05,
+		sunPosition: yellowSunPosition,
+		semiMajorAxis: 4.8,
+		eccentricity: 0.101,
+		inclination: 0.02
+	},
+	{
+		name: 'Didymus',
 		scale: 0.1,
 		color: 0x0000ff,
 		orbitSpeed: 0.5,
@@ -50,15 +65,17 @@ export const PLANETS = [
 		inclination: 0.059
 	},
 	{
+		name: 'Janus',
 		scale: 0.1,
 		color: 0x00ff00,
 		orbitSpeed: 0.252,
 		sunPosition: redSunPosition,
-		semiMajorAxis: 2.2,
+		semiMajorAxis: 2.3,
 		eccentricity: -0.094,
 		inclination: 0.031
 	},
 	{
+		name: 'Genussa',
 		scale: 0.1,
 		color: 0xffa500,
 		orbitSpeed: 0.08,
@@ -68,6 +85,7 @@ export const PLANETS = [
 		inclination: 0.044
 	},
 	{
+		name: 'Mystra',
 		scale: 0.1,
 		color: 0x800080,
 		orbitSpeed: 0.04,
