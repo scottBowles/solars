@@ -11,7 +11,7 @@
 </script>
 
 <T.PerspectiveCamera makeDefault position={[0, 10, 10]} fov={45}>
-	<OrbitControls enableZoom={false} enableDamping />
+	<OrbitControls enableZoom={true} enableDamping />
 </T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.07} />
