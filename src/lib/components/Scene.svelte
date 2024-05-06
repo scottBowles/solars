@@ -1,30 +1,78 @@
 <script lang="ts">
+	import * as THREE from 'three';
 	import { T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
 	import { Stars } from '@threlte/extras';
+	import { interactivity } from '@threlte/extras';
+	import { writable } from 'svelte/store';
 
 	import RedSun from '$lib/components/models/RedSun.svelte';
 	import YellowSun from '$lib/components/models/YellowStar.svelte';
 	import Planet from '$lib/components/Planet.svelte';
-	import OrbitLine from './OrbitLine.svelte';
 	import { yellowSunPosition, redSunPosition, PLANETS } from '$lib/constants';
+
+	import OrbitLine from './OrbitLine.svelte';
+	import { makeTweenedPosition } from '$lib/stores';
+
+	interactivity();
+
+	const animateOrbits = writable(true);
+
+	const cameraPosition = makeTweenedPosition([0, 10, 10]);
+	let cameraTarget = [0, 0, 0] as [number, number, number];
+
+	let focusedPlanet = writable<THREE.Object3D | null>(null);
+
+	const updateFocusedPlanet = (planet: THREE.Object3D | null) => {
+		if (planet) {
+			$animateOrbits = false;
+			const position = planet.position.toArray();
+			cameraTarget = position;
+			$cameraPosition = [position[0], position[1], position[2] + 0.4];
+		} else {
+			$cameraPosition = [0, 10, 10];
+			$animateOrbits = true;
+			cameraTarget = [0, 0, 0];
+		}
+	};
+
+	$: updateFocusedPlanet($focusedPlanet);
 </script>
 
-<T.PerspectiveCamera makeDefault position={[0, 10, 10]} fov={45}>
-	<OrbitControls enableZoom={true} enableDamping />
+<svelte:body
+	on:keydown={(e) => {
+		if (e.key === 'Escape') {
+			$focusedPlanet = null;
+		}
+	}}
+/>
+
+<T.PerspectiveCamera makeDefault position={$cameraPosition}>
+	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.07} />
 
 <Stars />
+<T.Group>
+	<RedSun scale={0.06} position={redSunPosition.toArray()} />
+	<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
 
-<RedSun scale={0.06} position={redSunPosition.toArray()} />
-<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
+	<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
 
-<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
-<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
-
-{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination }}
-	<Planet {scale} {color} {orbitSpeed} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
-	<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
-{/each}
+	{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination }}
+		<Planet
+			{scale}
+			{color}
+			{orbitSpeed}
+			{sunPosition}
+			{semiMajorAxis}
+			{eccentricity}
+			{inclination}
+			{animateOrbits}
+			{focusedPlanet}
+		/>
+		<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
+	{/each}
+</T.Group>
