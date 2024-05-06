@@ -34,5 +34,5 @@
 
 <T.Line
 	geometry={new THREE.BufferGeometry().setFromPoints(orbitLine)}
-	material={new THREE.LineBasicMaterial({ color })}
+	material={new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.6 })}
 />
