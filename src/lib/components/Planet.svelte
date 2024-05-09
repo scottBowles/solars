@@ -13,6 +13,7 @@
 	export let sunPosition: THREE.Vector3;
 	export let animateOrbits: Writable<boolean>;
 	export let focusedPlanet: Writable<THREE.Object3D | null>;
+	export let reverse: boolean = false;
 
 	let planet = new THREE.Object3D();
 
@@ -24,7 +25,7 @@
 
 	const { start, stop } = useTask(
 		(delta) => {
-			const newAngle = angle + orbitSpeed * delta;
+			const newAngle = reverse ? angle - orbitSpeed * delta : angle + orbitSpeed * delta;
 			angle = newAngle;
 			position = getPositionForAngle(newAngle);
 		},

@@ -15,6 +15,11 @@
 	import { makeTweenedPosition } from '$lib/stores';
 	import Chromium from './Chromium.svelte';
 
+	export let yellowDirection: 'clockwise' | 'counterclockwise';
+	export let redDirection: 'clockwise' | 'counterclockwise';
+	export let scaleFactor: number;
+	export let speedFactor: number;
+
 	interactivity();
 
 	const animateOrbits = writable(true);
@@ -64,22 +69,24 @@
 
 	{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination }}
 		<Planet
-			{scale}
+			scale={scale * scaleFactor}
 			{color}
-			{orbitSpeed}
+			orbitSpeed={orbitSpeed * speedFactor}
 			{sunPosition}
 			{semiMajorAxis}
 			{eccentricity}
 			{inclination}
 			{animateOrbits}
 			{focusedPlanet}
+			reverse={(sunPosition === yellowSunPosition && yellowDirection === 'counterclockwise') ||
+				(sunPosition === redSunPosition && redDirection === 'counterclockwise')}
 		/>
 		<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
 	{/each}
 	<Chromium
-		scale={0.1}
+		scale={0.1 * scaleFactor}
 		color={0xff0000}
-		orbitSpeed={0.07}
+		orbitSpeed={0.07 * speedFactor}
 		semiMajorAxis={5}
 		eccentricity={0}
 		inclination={0}
