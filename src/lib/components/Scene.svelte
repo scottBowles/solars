@@ -13,6 +13,7 @@
 
 	import OrbitLine from './OrbitLine.svelte';
 	import { makeTweenedPosition } from '$lib/stores';
+	import Chromium from './Chromium.svelte';
 
 	interactivity();
 
@@ -75,4 +76,30 @@
 		/>
 		<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
 	{/each}
+	<Chromium
+		scale={0.1}
+		color={0xff0000}
+		orbitSpeed={0.07}
+		semiMajorAxis={5}
+		eccentricity={0}
+		inclination={0}
+		{redSunPosition}
+		{yellowSunPosition}
+		{animateOrbits}
+		{focusedPlanet}
+	/>
+	<OrbitLine
+		color={0xff0000}
+		sunPosition={redSunPosition}
+		semiMajorAxis={5}
+		eccentricity={0}
+		inclination={0}
+	/>
+	<OrbitLine
+		color={0xff0000}
+		sunPosition={yellowSunPosition}
+		semiMajorAxis={5}
+		eccentricity={0}
+		inclination={0}
+	/>
 </T.Group>
