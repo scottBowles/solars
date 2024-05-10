@@ -87,7 +87,7 @@
 		scale={0.1 * scaleFactor}
 		color={0xff0000}
 		orbitSpeed={0.07 * speedFactor}
-		semiMajorAxis={5}
+		semiMajorAxis={3.8}
 		eccentricity={0}
 		inclination={0}
 		{redSunPosition}
@@ -98,14 +98,14 @@
 	<OrbitLine
 		color={0xff0000}
 		sunPosition={redSunPosition}
-		semiMajorAxis={5}
+		semiMajorAxis={3.8}
 		eccentricity={0}
 		inclination={0}
 	/>
 	<OrbitLine
 		color={0xff0000}
 		sunPosition={yellowSunPosition}
-		semiMajorAxis={5}
+		semiMajorAxis={3.8}
 		eccentricity={0}
 		inclination={0}
 	/>
