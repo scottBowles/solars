@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 export const yellowSunPosition = new THREE.Vector3(5, 0, 0);
 export const redSunPosition = new THREE.Vector3(-5, 0, 0);
+export const midpointBetweenTheSuns = yellowSunPosition.clone().lerp(redSunPosition, 0.5);
 
 export const PLANETS = [
 	{

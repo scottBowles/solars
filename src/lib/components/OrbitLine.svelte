@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { calculateEllipticalOrbitPosition } from '$lib/utils';
 	import { T } from '@threlte/core';
 	import * as THREE from 'three';
 
@@ -8,28 +7,46 @@
 	export let semiMajorAxis: number;
 	export let eccentricity: number;
 	export let inclination: number;
+	export let getPositionForAngle: (arg: {
+		sunPosition: THREE.Vector3;
+		midpointBetweenTheSuns: THREE.Vector3;
+		angle: number;
+		semiMajorAxis: number;
+		eccentricity: number;
+		inclination: number;
+		direction?: 'clockwise' | 'counterclockwise';
+	}) => THREE.Vector3;
+	export let midpointBetweenTheSuns: THREE.Vector3;
 
 	function createOrbitLine(
 		semiMajorAxis: number,
 		eccentricity: number,
 		inclination: number,
-		sunPosition: THREE.Vector3
+		sunPosition: THREE.Vector3,
+		midpointBetweenTheSuns: THREE.Vector3
 	): THREE.Vector3[] {
 		const orbitPoints = [];
 		for (let angle = 0; angle < Math.PI * 2; angle += 0.01) {
-			const position = calculateEllipticalOrbitPosition(
+			const position = getPositionForAngle({
 				angle,
 				semiMajorAxis,
 				eccentricity,
 				inclination,
-				sunPosition
-			);
+				sunPosition,
+				midpointBetweenTheSuns
+			});
 			orbitPoints.push(position);
 		}
 		return orbitPoints;
 	}
 
-	$: orbitLine = createOrbitLine(semiMajorAxis, eccentricity, inclination, sunPosition);
+	$: orbitLine = createOrbitLine(
+		semiMajorAxis,
+		eccentricity,
+		inclination,
+		sunPosition,
+		midpointBetweenTheSuns
+	);
 </script>
 
 <T.Line

@@ -18,7 +18,13 @@
 	let planet = new THREE.Object3D();
 
 	const getPositionForAngle = (angle: number) =>
-		calculateEllipticalOrbitPosition(angle, semiMajorAxis, eccentricity, inclination, sunPosition);
+		calculateEllipticalOrbitPosition({
+			angle,
+			semiMajorAxis,
+			eccentricity,
+			inclination,
+			sunPosition
+		});
 
 	let angle = Math.random() * Math.PI * 2;
 	let position = getPositionForAngle(angle);

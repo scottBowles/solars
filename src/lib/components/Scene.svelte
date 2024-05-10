@@ -9,11 +9,17 @@
 	import RedSun from '$lib/components/models/RedSun.svelte';
 	import YellowSun from '$lib/components/models/YellowStar.svelte';
 	import Planet from '$lib/components/Planet.svelte';
-	import { yellowSunPosition, redSunPosition, PLANETS } from '$lib/constants';
+	import {
+		yellowSunPosition,
+		redSunPosition,
+		midpointBetweenTheSuns,
+		PLANETS
+	} from '$lib/constants';
 
 	import OrbitLine from './OrbitLine.svelte';
 	import { makeTweenedPosition } from '$lib/stores';
 	import Chromium from './Chromium.svelte';
+	import { calculateEllipticalOrbitPosition, getFigureEightPositionForAngle } from '$lib/utils';
 
 	export let yellowDirection: 'clockwise' | 'counterclockwise';
 	export let redDirection: 'clockwise' | 'counterclockwise';
@@ -81,7 +87,15 @@
 			reverse={(sunPosition === yellowSunPosition && yellowDirection === 'counterclockwise') ||
 				(sunPosition === redSunPosition && redDirection === 'counterclockwise')}
 		/>
-		<OrbitLine {color} {sunPosition} {semiMajorAxis} {eccentricity} {inclination} />
+		<OrbitLine
+			{color}
+			{sunPosition}
+			{semiMajorAxis}
+			{eccentricity}
+			{inclination}
+			getPositionForAngle={calculateEllipticalOrbitPosition}
+			{midpointBetweenTheSuns}
+		/>
 	{/each}
 	<Chromium
 		scale={0.1 * scaleFactor}
@@ -101,6 +115,8 @@
 		semiMajorAxis={3.8}
 		eccentricity={0}
 		inclination={0}
+		getPositionForAngle={getFigureEightPositionForAngle}
+		{midpointBetweenTheSuns}
 	/>
 	<OrbitLine
 		color={0xff0000}
@@ -108,5 +124,7 @@
 		semiMajorAxis={3.8}
 		eccentricity={0}
 		inclination={0}
+		getPositionForAngle={getFigureEightPositionForAngle}
+		{midpointBetweenTheSuns}
 	/>
 </T.Group>
