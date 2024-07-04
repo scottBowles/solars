@@ -13,17 +13,19 @@ export const PLANETS = [
 		sunPosition: yellowSunPosition,
 		semiMajorAxis: 1.8,
 		eccentricity: 0.019,
-		inclination: 0.122
+		inclination: 0.122,
+		planetC: 'magmus'
 	},
 	{
 		name: 'Felucia',
-		scale: 0.1,
+		scale: 0.0005,
 		color: 0x00ff00,
 		orbitSpeed: 0.252,
 		sunPosition: yellowSunPosition,
 		semiMajorAxis: 2.6,
 		eccentricity: 0.097,
-		inclination: 0
+		inclination: 0,
+		planetC: 'felucia'
 	},
 	{
 		name: 'Terran',
@@ -93,6 +95,7 @@ export const PLANETS = [
 		sunPosition: redSunPosition,
 		semiMajorAxis: 4.2,
 		eccentricity: -0.01,
-		inclination: 0.031
+		inclination: 0.031,
+		planetC: 'purple'
 	}
 ];

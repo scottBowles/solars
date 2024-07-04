@@ -63,7 +63,7 @@
 	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
-<T.AmbientLight intensity={0.07} />
+<T.AmbientLight intensity={0.7} />
 
 <Stars />
 <T.Group>
@@ -73,8 +73,9 @@
 	<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
 	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
 
-	{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination }}
+	{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination, planetC }}
 		<Planet
+			{planetC}
 			scale={scale * scaleFactor}
 			{color}
 			orbitSpeed={orbitSpeed * speedFactor}
@@ -103,7 +104,7 @@
 		orbitSpeed={0.07 * speedFactor}
 		semiMajorAxis={3.8}
 		eccentricity={0}
-		inclination={0}
+		inclination={0.2}
 		{redSunPosition}
 		{yellowSunPosition}
 		{animateOrbits}
@@ -114,7 +115,7 @@
 		sunPosition={redSunPosition}
 		semiMajorAxis={3.8}
 		eccentricity={0}
-		inclination={0}
+		inclination={0.2}
 		getPositionForAngle={getFigureEightPositionForAngle}
 		{midpointBetweenTheSuns}
 	/>
@@ -123,7 +124,7 @@
 		sunPosition={yellowSunPosition}
 		semiMajorAxis={3.8}
 		eccentricity={0}
-		inclination={0}
+		inclination={0.2}
 		getPositionForAngle={getFigureEightPositionForAngle}
 		{midpointBetweenTheSuns}
 	/>

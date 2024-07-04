@@ -3,6 +3,15 @@
 	import { T, useTask } from '@threlte/core';
 	import type { Writable } from 'svelte/store';
 	import * as THREE from 'three';
+	import GreenPlanet1k from './models/GreenPlanet1k.svelte';
+	import LavaPlanet1k from './models/LavaPlanet1k.svelte';
+	import PurplePlanet1k from './models/PurplePlanet1k.svelte';
+	import BlenderPlanet from './models/BlenderPlanet.svelte';
+	import BlenderPlanetUncompressed from './models/BlenderPlanetUncompressed.svelte';
+	import Planet3_eevee from './models/Planet3_eevee.svelte';
+	import Planet3_uncompressed from './models/Planet3_uncompressed.svelte';
+	import Planet3_eevee_uncompressed from './models/Planet3_eevee_uncompressed.svelte';
+	import Planet4_cycles_uncompressed from './models/Planet4_cycles_uncompressed.svelte';
 
 	export let scale: number;
 	export let color: number;
@@ -14,6 +23,7 @@
 	export let animateOrbits: Writable<boolean>;
 	export let focusedPlanet: Writable<THREE.Object3D | null>;
 	export let reverse: boolean = false;
+	export let planetC: string = '';
 
 	let planet = new THREE.Object3D();
 
@@ -54,14 +64,53 @@
 	};
 </script>
 
-<T.Mesh
+<Planet4_cycles_uncompressed
 	{scale}
 	position={position.toArray()}
 	on:click={handleClick}
 	on:create={({ ref }) => {
 		planet = ref;
 	}}
->
-	<T.SphereGeometry />
-	<T.MeshStandardMaterial {color} />
-</T.Mesh>
+/>
+<!-- {#if planetC}
+	{#if planetC === 'felucia'}
+		<GreenPlanet1k
+			{scale}
+			position={position.toArray()}
+			on:click={handleClick}
+			on:create={({ ref }) => {
+				planet = ref;
+			}}
+		/>
+	{:else if planetC === 'magmus'}
+		<LavaPlanet1k
+			{scale}
+			position={position.toArray()}
+			on:click={handleClick}
+			on:create={({ ref }) => {
+				planet = ref;
+			}}
+		/>
+	{:else if planetC === 'purple'}
+		<PurplePlanet1k
+			{scale}
+			position={position.toArray()}
+			on:click={handleClick}
+			on:create={({ ref }) => {
+				planet = ref;
+			}}
+		/>
+	{/if}
+{:else}
+	<T.Mesh
+		{scale}
+		position={position.toArray()}
+		on:click={handleClick}
+		on:create={({ ref }) => {
+			planet = ref;
+		}}
+	>
+		<T.SphereGeometry />
+		<T.MeshStandardMaterial {color} />
+	</T.Mesh>
+{/if} -->
