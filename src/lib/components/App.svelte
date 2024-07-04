@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
 
@@ -54,6 +55,8 @@
 <label for="speed" style="color: white;">Planet Speed</label>
 <input id="speed" type="range" min=".5" max="5" step="0.01" bind:value={speedFactor} />
 
-<Canvas dpr={Math.min(window.devicePixelRatio, 2)}>
-	<Scene {yellowDirection} {redDirection} {scaleFactor} {speedFactor} />
-</Canvas>
+{#if browser}
+	<Canvas dpr={Math.min(window?.devicePixelRatio ?? 1, 2)}>
+		<Scene {yellowDirection} {redDirection} {scaleFactor} {speedFactor} />
+	</Canvas>
+{/if}
