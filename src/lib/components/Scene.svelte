@@ -17,14 +17,12 @@
 	} from '$lib/constants';
 
 	import OrbitLine from './OrbitLine.svelte';
-	import { makeTweenedPosition } from '$lib/stores';
+	import { getGlobalValues, makeTweenedPosition } from '$lib/stores';
 	import Chromium from './Chromium.svelte';
 	import { calculateEllipticalOrbitPosition, getFigureEightPositionForAngle } from '$lib/utils';
 
-	export let yellowDirection: 'clockwise' | 'counterclockwise';
-	export let redDirection: 'clockwise' | 'counterclockwise';
-	export let scaleFactor: number;
-	export let speedFactor: number;
+	const globalValues = getGlobalValues();
+	$: ({ yellowClockwise, redClockwise, scaleFactor, speedFactor } = $globalValues);
 
 	interactivity();
 
@@ -63,7 +61,7 @@
 	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
-<T.AmbientLight intensity={0.7} />
+<T.AmbientLight intensity={1.7} />
 
 <Stars />
 <T.Group>
@@ -85,8 +83,8 @@
 			{inclination}
 			{animateOrbits}
 			{focusedPlanet}
-			reverse={(sunPosition === yellowSunPosition && yellowDirection === 'counterclockwise') ||
-				(sunPosition === redSunPosition && redDirection === 'counterclockwise')}
+			reverse={(sunPosition === yellowSunPosition && !yellowClockwise) ||
+				(sunPosition === redSunPosition && !redClockwise)}
 		/>
 		<OrbitLine
 			{color}

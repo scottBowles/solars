@@ -2,13 +2,9 @@
 	import { browser } from '$app/environment';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
-
-	let yellowDirection: 'clockwise' | 'counterclockwise' = 'clockwise';
-	let redDirection: 'clockwise' | 'counterclockwise' = 'clockwise';
-	let scaleFactor = 1;
-	let speedFactor = 1;
 </script>
 
+<!-- 
 <input
 	type="radio"
 	name="yellowDirection"
@@ -53,10 +49,10 @@
 <br />
 
 <label for="speed" style="color: white;">Planet Speed</label>
-<input id="speed" type="range" min=".5" max="5" step="0.01" bind:value={speedFactor} />
+<input id="speed" type="range" min=".5" max="5" step="0.01" bind:value={speedFactor} /> -->
 
 {#if browser}
 	<Canvas dpr={Math.min(window?.devicePixelRatio ?? 1, 2)}>
-		<Scene {yellowDirection} {redDirection} {scaleFactor} {speedFactor} />
+		<Scene />
 	</Canvas>
 {/if}
