@@ -8,6 +8,7 @@
 	import { makeTweenedPosition } from '$lib/stores';
 	import { redSunPosition, yellowSunPosition } from '$lib/constants';
 	import Clouds from './Clouds.svelte';
+	import Atmosphere from './Atmosphere.svelte';
 
 	interactivity();
 
@@ -23,12 +24,39 @@
 
 <Stars />
 <T.Group>
-	<RedSun scale={0.06} position={redSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
+	<!-- <RedSun scale={0.06} position={redSunPosition.toArray()} />
+	<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} /> -->
 
-	<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
-
-	<Planet4_cycles_uncompressed scale={3} position={[0, 0, 0]} />
-	<Clouds position={[0, 0, 0]} sphereGeometryArgs={[3.15, 32, 32]} />
+	<!-- <YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} /> -->
+	<!-- <T.Mesh position={[10, 0, 0]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh> -->
+	<Planet4_cycles_uncompressed scale={2} position={[10, 0, 0]} />
+	<T.Mesh position={[-10, 0, 0]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh>
+	<!-- <T.Mesh position={[0, 0, 10]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh> -->
+	<Planet4_cycles_uncompressed scale={2} position={[0, 0, 10]} />
+	<T.Mesh position={[0, 0, -10]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh>
+	<!-- <T.Mesh position={[0, 10, 0]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh> -->
+	<Planet4_cycles_uncompressed scale={2} position={[0, 10, 0]} />
+	<T.Mesh position={[0, -10, 0]}>
+		<T.SphereGeometry args={[1.5, 32, 32]} />
+		<T.MeshBasicMaterial color="#ffffff" />
+	</T.Mesh>
+	<Planet4_cycles_uncompressed scale={3} position={[0, 0, 0]} renderOrder={0} />
+	<Clouds position={[0, 0, 0]} planetRadius={3} />
+	<Atmosphere position={[0, 0, 0]} planetRadius={3} renderOrder={1} />
 </T.Group>

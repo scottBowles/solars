@@ -1,15 +1,16 @@
 <script lang="ts">
 	import App from '$lib/components/App.svelte';
-	import { setCloudValues, setGlobalValues } from '$lib/stores';
+	import { setAtmosphereValues, setCloudValues, setGlobalValues } from '$lib/stores';
 	import { Checkbox, Folder, Pane, Point, Slider } from 'svelte-tweakpane-ui';
 
 	const globalValues = setGlobalValues();
 	const cloudValues = setCloudValues();
+	const atmosphereValues = setAtmosphereValues();
 </script>
 
 <div>
 	<Pane position="draggable">
-		<Folder>
+		<Folder title="Global">
 			<Checkbox bind:value={$globalValues.yellowClockwise} label="Yellow Clockwise" />
 			<Checkbox bind:value={$globalValues.redClockwise} label="Red Clockwise" />
 			<Slider
@@ -27,7 +28,7 @@
 				step={0.01}
 			/>
 		</Folder>
-		<Folder>
+		<Folder title="Clouds">
 			<Point bind:value={$cloudValues.uColorStart} label="uColorStart" min={0} max={1} />
 			<Point bind:value={$cloudValues.uColorEnd} label="uColorStart" min={0} max={1} />
 			<Slider bind:value={$cloudValues.uScale} label="uScale" min={0} max={2} step={0.01} />
@@ -59,6 +60,38 @@
 				label="uCloudDensity"
 				min={0}
 				max={1}
+				step={0.01}
+			/>
+		</Folder>
+		<Folder title="Atmosphere">
+			<Point bind:value={$atmosphereValues.planetColor} label="planetColor" />
+			<Point bind:value={$atmosphereValues.scatterColor} label="scatterColor" />
+			<Slider
+				bind:value={$atmosphereValues.alphaMultiplier}
+				label="alphaMultiplier"
+				min={0}
+				max={1}
+				step={0.01}
+			/>
+			<Slider
+				bind:value={$atmosphereValues.fresnelPower}
+				label="fresnelPower"
+				min={0}
+				max={5}
+				step={0.01}
+			/>
+			<Slider
+				bind:value={$atmosphereValues.atmosphereRadius}
+				label="atmosphereRadius"
+				min={0}
+				max={1}
+				step={0.01}
+			/>
+			<Slider
+				bind:value={$atmosphereValues.planetRadiusMultiplier}
+				label="planetRadiusMultiplier"
+				min={1}
+				max={1.1}
 				step={0.01}
 			/>
 		</Folder>

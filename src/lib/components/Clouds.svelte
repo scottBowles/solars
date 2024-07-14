@@ -4,7 +4,7 @@
 	import * as THREE from 'three';
 
 	export let position: [number, number, number] = [0, 0, 0];
-	export let sphereGeometryArgs: [number, number, number] = [3.15, 32, 32];
+	export let planetRadius: number;
 
 	const cloudValues = getCloudValues();
 
@@ -34,7 +34,7 @@
 </script>
 
 <T.Mesh {position}>
-	<T.SphereGeometry args={sphereGeometryArgs} />
+	<T.SphereGeometry args={[planetRadius * $cloudValues.planetRadiusMultiplier, 32, 32]} />
 	{#key uniforms}
 		<T.ShaderMaterial
 			{uniforms}

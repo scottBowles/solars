@@ -45,6 +45,7 @@ type CloudValues = {
 	uColorEnd: [number, number, number];
 	uCloudCoverage: number;
 	uCloudDensity: number;
+	planetRadiusMultiplier: number;
 };
 
 export const setCloudValues = () => {
@@ -57,7 +58,8 @@ export const setCloudValues = () => {
 		uColorStart: [1, 1, 1], // White clouds,
 		uColorEnd: [0.7, 0.7, 0.7], // Light grey clouds,
 		uCloudCoverage: 0.51, // Adjust this to control cloud coverage,
-		uCloudDensity: 0.34
+		uCloudDensity: 0.34,
+		planetRadiusMultiplier: 1.025
 	};
 	const cloudValues = writable<CloudValues>(initValues);
 	setContext('cloudValues', cloudValues);
@@ -66,6 +68,49 @@ export const setCloudValues = () => {
 
 export const getCloudValues = () => {
 	return getContext<Writable<CloudValues>>('cloudValues');
+};
+
+type AtmosphereValues = {
+	planetColor: [number, number, number];
+	scatterColor: [number, number, number];
+	alphaMultiplier: number;
+	fresnelPower: number;
+	atmosphereRadius: number;
+	fadeFromOuterRadius: boolean;
+	planetRadiusMultiplier: number;
+};
+
+export const setAtmosphereValues = () => {
+	let initValues: AtmosphereValues = {
+		planetColor: [0.1, 0.6, 0.3],
+		scatterColor: [0.4, 0.7, 1.0],
+		alphaMultiplier: 0.39,
+		fresnelPower: 4.58,
+		atmosphereRadius: 0.025,
+		fadeFromOuterRadius: true,
+		planetRadiusMultiplier: 1.05
+	};
+	const yes = true;
+	if (yes) {
+		initValues = {
+			planetColor: [0.1, 0.6, 0.3],
+			scatterColor: [0.4, 0.7, 1.0],
+			// alphaMultiplier: 0.21,
+			// fresnelPower: 1.92,
+			alphaMultiplier: 0.1,
+			fresnelPower: 3.11,
+			atmosphereRadius: 0.025,
+			fadeFromOuterRadius: false,
+			planetRadiusMultiplier: 1.05
+		};
+	}
+	const atmosphereValues = writable<AtmosphereValues>(initValues);
+	setContext('atmosphereValues', atmosphereValues);
+	return atmosphereValues;
+};
+
+export const getAtmosphereValues = () => {
+	return getContext<Writable<AtmosphereValues>>('atmosphereValues');
 };
 
 type GlobalValues = {

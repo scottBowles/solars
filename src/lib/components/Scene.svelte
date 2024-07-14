@@ -61,7 +61,7 @@
 	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
-<T.AmbientLight intensity={1.7} />
+<T.AmbientLight intensity={3.7} />
 
 <Stars />
 <T.Group>

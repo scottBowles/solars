@@ -13,6 +13,7 @@
 	import Planet3_eevee_uncompressed from './models/Planet3_eevee_uncompressed.svelte';
 	import Planet4_cycles_uncompressed from './models/Planet4_cycles_uncompressed.svelte';
 	import Clouds from './Clouds.svelte';
+	import Atmosphere from './Atmosphere.svelte';
 
 	export let scale: number;
 	export let color: number;
@@ -72,8 +73,10 @@
 	on:create={({ ref }) => {
 		planet = ref;
 	}}
+	renderOrder={0}
 />
-<Clouds position={position.toArray()} sphereGeometryArgs={[scale * 1.05, 32, 32]} />
+<Clouds position={position.toArray()} planetRadius={scale} />
+<Atmosphere position={position.toArray()} planetRadius={scale} renderOrder={1} />
 <!-- {#if planetC}
 	{#if planetC === 'felucia'}
 		<GreenPlanet1k
