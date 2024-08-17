@@ -9,6 +9,9 @@
 	import { redSunPosition, yellowSunPosition } from '$lib/constants';
 	import Clouds from './Clouds.svelte';
 	import Atmosphere from './Atmosphere.svelte';
+	import Falucia from './models/Falucia.svelte';
+	import Hyangwan from './models/Hyangwan.svelte';
+	import Magmus from './models/Magmus.svelte';
 
 	interactivity();
 
@@ -20,43 +23,21 @@
 	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
-<T.AmbientLight intensity={3.7} />
+<T.AmbientLight intensity={0.7} />
 
 <Stars />
 <T.Group>
-	<!-- <RedSun scale={0.06} position={redSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} /> -->
+	<RedSun scale={0.06} position={redSunPosition.toArray()} />
+	<T.PointLight intensity={60} color="#ff0000" position={redSunPosition.toArray()} />
+	<T.PointLight intensity={50} color="#fff" position={redSunPosition.toArray()} />
 
-	<!-- <YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} /> -->
-	<!-- <T.Mesh position={[10, 0, 0]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh> -->
-	<Planet4_cycles_uncompressed scale={2} position={[10, 0, 0]} />
-	<T.Mesh position={[-10, 0, 0]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh>
-	<!-- <T.Mesh position={[0, 0, 10]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh> -->
-	<Planet4_cycles_uncompressed scale={2} position={[0, 0, 10]} />
-	<T.Mesh position={[0, 0, -10]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh>
-	<!-- <T.Mesh position={[0, 10, 0]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh> -->
-	<Planet4_cycles_uncompressed scale={2} position={[0, 10, 0]} />
-	<T.Mesh position={[0, -10, 0]}>
-		<T.SphereGeometry args={[1.5, 32, 32]} />
-		<T.MeshBasicMaterial color="#ffffff" />
-	</T.Mesh>
-	<Planet4_cycles_uncompressed scale={3} position={[0, 0, 0]} renderOrder={0} />
-	<Clouds position={[0, 0, 0]} planetRadius={3} />
-	<Atmosphere position={[0, 0, 0]} planetRadius={3} renderOrder={1} />
+	<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={50} color="#ffff00" position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={40} color="#fff" position={yellowSunPosition.toArray()} />
+	<!-- <Magmus scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
+	<!-- <Hyangwan scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
+	<Falucia scale={1} position={[0, 0, 0]} renderOrder={0} />
+	<!-- <Planet4_cycles_uncompressed scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
+	<Clouds position={[0, 0, 0]} planetRadius={1} />
+	<Atmosphere position={[0, 0, 0]} planetRadius={1} renderOrder={1} />
 </T.Group>

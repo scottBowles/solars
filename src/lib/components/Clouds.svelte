@@ -6,6 +6,8 @@
 	export let position: [number, number, number] = [0, 0, 0];
 	export let planetRadius: number;
 
+	$: console.log('planetRadius', planetRadius);
+
 	const cloudValues = getCloudValues();
 
 	$: uniforms = {

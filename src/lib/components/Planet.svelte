@@ -12,6 +12,7 @@
 	import Planet3_uncompressed from './models/Planet3_uncompressed.svelte';
 	import Planet3_eevee_uncompressed from './models/Planet3_eevee_uncompressed.svelte';
 	import Planet4_cycles_uncompressed from './models/Planet4_cycles_uncompressed.svelte';
+	import PlanetModel from './models/Planet.svelte';
 	import Clouds from './Clouds.svelte';
 	import Atmosphere from './Atmosphere.svelte';
 
@@ -66,7 +67,8 @@
 	};
 </script>
 
-<Planet4_cycles_uncompressed
+<!-- <Planet4_cycles_uncompressed -->
+<PlanetModel
 	{scale}
 	position={position.toArray()}
 	on:click={handleClick}

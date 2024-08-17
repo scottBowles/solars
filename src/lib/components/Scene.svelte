@@ -61,15 +61,17 @@
 	<OrbitControls enableZoom={true} enableDamping target={cameraTarget} />
 </T.PerspectiveCamera>
 
-<T.AmbientLight intensity={3.7} />
+<T.AmbientLight intensity={0.7} />
 
 <Stars />
 <T.Group>
 	<RedSun scale={0.06} position={redSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ff0000" position={redSunPosition.toArray()} />
+	<T.PointLight intensity={40} color="#ff0000" position={redSunPosition.toArray()} />
+	<T.PointLight intensity={30} color="#fff" position={redSunPosition.toArray()} />
 
 	<YellowSun scale={0.004} position={yellowSunPosition.toArray()} />
-	<T.PointLight intensity={7} color="#ffff00" position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={30} color="#ffff00" position={yellowSunPosition.toArray()} />
+	<T.PointLight intensity={20} color="#fff" position={yellowSunPosition.toArray()} />
 
 	{#each PLANETS as { scale, color, orbitSpeed, sunPosition, semiMajorAxis, eccentricity, inclination, planetC }}
 		<Planet

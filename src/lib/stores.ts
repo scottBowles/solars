@@ -50,15 +50,15 @@ type CloudValues = {
 
 export const setCloudValues = () => {
 	const initValues: CloudValues = {
-		uScale: 0.39,
-		uDetail: 7.7,
-		uRoughness: 0.61,
-		uLacunarity: 2.5,
+		uScale: 1.42,
+		uDetail: 10.0,
+		uRoughness: 0.69,
+		uLacunarity: 2.2,
 		uDistortion: 0.26,
 		uColorStart: [1, 1, 1], // White clouds,
 		uColorEnd: [0.7, 0.7, 0.7], // Light grey clouds,
 		uCloudCoverage: 0.51, // Adjust this to control cloud coverage,
-		uCloudDensity: 0.34,
+		uCloudDensity: 0.51,
 		planetRadiusMultiplier: 1.025
 	};
 	const cloudValues = writable<CloudValues>(initValues);
@@ -84,11 +84,11 @@ export const setAtmosphereValues = () => {
 	let initValues: AtmosphereValues = {
 		planetColor: [0.1, 0.6, 0.3],
 		scatterColor: [0.4, 0.7, 1.0],
-		alphaMultiplier: 0.39,
-		fresnelPower: 4.58,
-		atmosphereRadius: 0.025,
+		alphaMultiplier: 0.11,
+		fresnelPower: 2.9,
+		atmosphereRadius: 0.66,
 		fadeFromOuterRadius: true,
-		planetRadiusMultiplier: 1.05
+		planetRadiusMultiplier: 1.06
 	};
 	const yes = true;
 	if (yes) {
