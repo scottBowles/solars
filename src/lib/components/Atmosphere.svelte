@@ -3,7 +3,6 @@
 	import { T } from '@threlte/core';
 	import * as THREE from 'three';
 
-	export let position: [number, number, number];
 	export let planetRadius: number;
 	export let renderOrder: number;
 
@@ -31,7 +30,7 @@
 	};
 </script>
 
-<T.Mesh {position} {renderOrder}>
+<T.Mesh {renderOrder}>
 	<T.SphereGeometry args={[planetRadius * $atmosphereValues.planetRadiusMultiplier, 64, 64]} />
 	{#key uniforms}
 		<T.ShaderMaterial

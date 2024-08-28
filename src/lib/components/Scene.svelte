@@ -20,6 +20,7 @@
 	import { getGlobalValues, makeTweenedPosition } from '$lib/stores';
 	import Chromium from './Chromium.svelte';
 	import { calculateEllipticalOrbitPosition, getFigureEightPositionForAngle } from '$lib/utils';
+	import PlanetTidalLock from '$lib/components/PlanetTidalLock.svelte';
 
 	const globalValues = getGlobalValues();
 	$: ({ yellowClockwise, redClockwise, scaleFactor, speedFactor } = $globalValues);

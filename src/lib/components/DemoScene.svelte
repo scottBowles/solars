@@ -12,6 +12,11 @@
 	import Falucia from './models/Falucia.svelte';
 	import Hyangwan from './models/Hyangwan.svelte';
 	import Magmus from './models/Magmus.svelte';
+	import Janus2 from './models/Janus2.svelte';
+	import * as THREE from 'three';
+
+	let planetOrbit = new THREE.Group();
+	let planet = new THREE.Group();
 
 	interactivity();
 
@@ -36,8 +41,15 @@
 	<T.PointLight intensity={40} color="#fff" position={yellowSunPosition.toArray()} />
 	<!-- <Magmus scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
 	<!-- <Hyangwan scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
-	<Falucia scale={1} position={[0, 0, 0]} renderOrder={0} />
 	<!-- <Planet4_cycles_uncompressed scale={1} position={[0, 0, 0]} renderOrder={0} /> -->
-	<Clouds position={[0, 0, 0]} planetRadius={1} />
-	<Atmosphere position={[0, 0, 0]} planetRadius={1} renderOrder={1} />
+	<!-- <Clouds position={[0, 0, 0]} planetRadius={1} /> -->
+	<!-- <Atmosphere position={[0, 0, 0]} planetRadius={1} renderOrder={1} /> -->
+
+	<T.Group bind:ref={planetOrbit} position={[0, 0, 0]}>
+		<T.Group bind:ref={planet}>
+			<Janus2 scale={1} renderOrder={0} />
+			<Clouds planetRadius={1} />
+			<Atmosphere planetRadius={1} renderOrder={1} />
+		</T.Group>
+	</T.Group>
 </T.Group>

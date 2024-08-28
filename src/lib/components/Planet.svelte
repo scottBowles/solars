@@ -12,7 +12,7 @@
 	import Planet3_uncompressed from './models/Planet3_uncompressed.svelte';
 	import Planet3_eevee_uncompressed from './models/Planet3_eevee_uncompressed.svelte';
 	import Planet4_cycles_uncompressed from './models/Planet4_cycles_uncompressed.svelte';
-	import PlanetModel from './models/Planet.svelte';
+	import TestPlanet from './models/Janus2.svelte';
 	import Clouds from './Clouds.svelte';
 	import Atmosphere from './Atmosphere.svelte';
 
@@ -28,25 +28,27 @@
 	export let reverse: boolean = false;
 	export let planetC: string = '';
 
-	let planet = new THREE.Object3D();
+	let planetOrbit: THREE.Group; // The orbit of the planet — governs the position of the planet
+	let planet: THREE.Group; // The planet itself — governs the rotation of the planet
 
-	const getPositionForAngle = (angle: number) =>
-		calculateEllipticalOrbitPosition({
+	const getPositionForAngle = (angle: number) => {
+		const vector3 = calculateEllipticalOrbitPosition({
 			angle,
 			semiMajorAxis,
 			eccentricity,
 			inclination,
 			sunPosition
 		});
+		return [vector3.x, vector3.y, vector3.z] as [number, number, number];
+	};
 
 	let angle = Math.random() * Math.PI * 2;
-	let position = getPositionForAngle(angle);
+	$: position = getPositionForAngle(angle);
 
 	const { start, stop } = useTask(
 		(delta) => {
 			const newAngle = reverse ? angle - orbitSpeed * delta : angle + orbitSpeed * delta;
 			angle = newAngle;
-			position = getPositionForAngle(newAngle);
 		},
 		{ autoStart: false }
 	);
@@ -67,18 +69,14 @@
 	};
 </script>
 
-<!-- <Planet4_cycles_uncompressed -->
-<PlanetModel
-	{scale}
-	position={position.toArray()}
-	on:click={handleClick}
-	on:create={({ ref }) => {
-		planet = ref;
-	}}
-	renderOrder={0}
-/>
-<Clouds position={position.toArray()} planetRadius={scale} />
-<Atmosphere position={position.toArray()} planetRadius={scale} renderOrder={1} />
+<T.Group bind:ref={planetOrbit} {position}>
+	<T.Group bind:ref={planet}>
+		<TestPlanet {scale} on:click={handleClick} renderOrder={0} />
+		<Clouds planetRadius={scale} />
+		<Atmosphere planetRadius={scale} renderOrder={1} />
+	</T.Group>
+</T.Group>
+
 <!-- {#if planetC}
 	{#if planetC === 'felucia'}
 		<GreenPlanet1k
